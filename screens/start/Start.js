@@ -8,8 +8,7 @@ export default function Start() {
       <StatusBar style="auto" />
       <Text>Welcome</Text>
 
-      {/* card view */}
-      <View>
+      <View style={styles.card}>
         <Text>Name:</Text>
         <TextInput/>
 
@@ -38,4 +37,12 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
+  card: {
+    padding: 10,
+    margin: 10,
+    borderWidth: 1,
+    borderRadius: 10,
+    borderColor: 'lightgrey',
+    backgroundColor: 'lightgrey',
+  }
 });
