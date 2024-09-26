@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { StatusBar } from 'expo-status-bar';
-import { Button, StyleSheet, Text, TextInput, View } from 'react-native';
+import { Button, StyleSheet, Text, TextInput, View, Alert } from 'react-native';
 import Checkbox from 'expo-checkbox';
 
 export default function Start() {
@@ -18,6 +18,18 @@ export default function Start() {
     setEmailInput('');
     setPhoneInput('');
     setIsRobot(false);
+  };
+
+  function checkInputs() {
+    if (!validName || !validEmail || !validPhone) {
+      Alert.alert(
+        'Invalid input',
+        'Please check all inputs',
+        [
+          { text: 'OK' }
+        ]
+      );
+    };
   };
 
   return (
@@ -70,6 +82,7 @@ export default function Start() {
         <Button
           title='Register'
           disabled={!isRobot}
+          onPress={() => { checkInputs() }}
         />
 
       </View>
