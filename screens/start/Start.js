@@ -1,8 +1,18 @@
+import React, { useState } from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { Button, StyleSheet, Text, TextInput, View } from 'react-native';
 import Checkbox from 'expo-checkbox';
 
 export default function Start() {
+  const [nameInput, setNameInput] = useState('');
+  const [emailInput, setEmailInput] = useState('');
+  const [phoneInput, setPhoneInput] = useState('');
+  const [isRobot, setIsRobot] = useState(false);
+
+  const [validName, setValidName] = useState(true);
+  const [validEmail, setValidEmail] = useState(true);
+  const [validPhone, setValidPhone] = useState(true);
+
   return (
     <View style={styles.container}>
       <StatusBar style="auto" />
@@ -10,19 +20,48 @@ export default function Start() {
 
       <View style={styles.card}>
         <Text>Name:</Text>
-        <TextInput/>
+        <TextInput
+          value={nameInput}
+          onChangeText={(text) => {
+            setNameInput(text);
+            setValidName(text.length > 1 && !text.match(/\d/));
+          }}
+        />
+        {validName ? null : <Text>Please enter a valid name</Text>}
 
         <Text>Email:</Text>
-        <TextInput/>
+        <TextInput
+          value={emailInput}
+          onChangeText={(text) => {
+            setEmailInput(text);
+            setValidEmail(text.includes('@') && text.includes('.'));
+          }}
+        />
+        {validEmail ? null : <Text>Please enter a valid email</Text>}
 
         <Text>Phone number:</Text>
-        <TextInput/>
+        <TextInput
+          value={phoneInput}
+          onChangeText={(text) => {
+            setPhoneInput(text);
+            setValidPhone(text.length === 10 && !isNaN(text) && text[text.length - 1] !== '0' && text[text.length - 1] !== '1');
+          }}
+        />
+        {validPhone ? null : <Text>Please enter a valid phone number</Text>}
 
-        <Checkbox/>
+        <Checkbox
+          value={isRobot}
+          onValueChange={setIsRobot}
+        />
         <Text>I am not a robot</Text>
 
-        <Button title='Reset'/>
-        <Button title='Register'/>
+        <Button
+          title='Reset'
+        />
+
+        <Button
+          title='Register'
+        />
 
       </View>
 
