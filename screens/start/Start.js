@@ -13,6 +13,13 @@ export default function Start() {
   const [validEmail, setValidEmail] = useState(true);
   const [validPhone, setValidPhone] = useState(true);
 
+  function clearInputs() {
+    setNameInput('');
+    setEmailInput('');
+    setPhoneInput('');
+    setIsRobot(false);
+  };
+
   return (
     <View style={styles.container}>
       <StatusBar style="auto" />
@@ -57,6 +64,7 @@ export default function Start() {
 
         <Button
           title='Reset'
+          onPress={clearInputs}
         />
 
         <Button
