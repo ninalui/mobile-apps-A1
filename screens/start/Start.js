@@ -69,6 +69,7 @@ export default function Start() {
 
         <Button
           title='Register'
+          disabled={!isRobot}
         />
 
       </View>
