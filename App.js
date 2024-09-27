@@ -3,11 +3,13 @@ import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, View } from 'react-native';
 import Start from './screens/start/Start';
 import Confirm from './screens/confirm/Confirm';
+import Game from './screens/game/Game';
 import { LinearGradient } from 'expo-linear-gradient';
 
 export default function App() {
   const [userData, setUserData] = useState([]);
   const [showConfirm, setShowConfirm] = useState(false);
+  const [showGame, setShowGame] = useState(false);
 
   function handleRegisterInput(inputData) {
     let newUser = { name: inputData.name, email: inputData.email, phone: inputData.phone };
@@ -19,12 +21,18 @@ export default function App() {
     setShowConfirm(false);
   };
 
+  function handleConfirmContinue() {
+    setShowConfirm(false);
+    setShowGame(true);
+  };
+
   return (
     <LinearGradient colors={['lightblue', 'mediumpurple']} style={styles.container}>
       <View style={styles.container}>
         <StatusBar style="auto" />
         <Start registerInputHandler={handleRegisterInput} />
         <Confirm userData={userData} showConfirm={showConfirm} goBackHandler={handleConfirmGoBack} />
+        <Game /> 
       </View >
     </LinearGradient>
   );
