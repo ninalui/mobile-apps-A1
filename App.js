@@ -15,12 +15,16 @@ export default function App() {
     setShowConfirm(true);
   };
 
+  function handleConfirmGoBack() {
+    setShowConfirm(false);
+  };
+
   return (
     <LinearGradient colors={['lightblue', 'mediumpurple']} style={styles.container}>
       <View style={styles.container}>
         <StatusBar style="auto" />
         <Start registerInputHandler={handleRegisterInput} />
-        <Confirm userData={userData} showConfirm={showConfirm} />
+        <Confirm userData={userData} showConfirm={showConfirm} goBackHandler={handleConfirmGoBack} />
       </View >
     </LinearGradient>
   );

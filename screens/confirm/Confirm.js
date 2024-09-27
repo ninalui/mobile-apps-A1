@@ -2,7 +2,7 @@ import { LinearGradient } from "expo-linear-gradient";
 import React, { useState } from "react";
 import { View, Text, Button, StyleSheet, Modal } from "react-native";
 
-export default function Confirm({ userData, showConfirm }) {
+export default function Confirm({ userData, showConfirm, goBackHandler }) {
 
   return (
     <Modal
@@ -28,6 +28,7 @@ export default function Confirm({ userData, showConfirm }) {
 
             <Button
               title="Go Back"
+              onPress={goBackHandler}
             />
 
           </View>
