@@ -6,17 +6,19 @@ import Confirm from './screens/confirm/Confirm';
 
 export default function App() {
   const [userData, setUserData] = useState([]);
+  const [showConfirm, setShowConfirm] = useState(false);
 
   function handleRegisterInput(inputData) {
     let newUser = { name: inputData.name, email: inputData.email, phone: inputData.phone };
     setUserData(newUser);
+    setShowConfirm(true);
   };
 
   return (
     <View style={styles.container}>
       <StatusBar style="auto" />
-      <Start registerInputHandler = {handleRegisterInput} />
-      { userData.length === 0 ? null : <Confirm userData = {userData} />}
+      <Start registerInputHandler={handleRegisterInput} />
+      {userData.length === 0 ? null : <Confirm userData={userData} showConfirm={showConfirm} />}
     </View>
   );
 }
