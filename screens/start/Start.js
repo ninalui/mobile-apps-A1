@@ -3,7 +3,7 @@ import { StatusBar } from 'expo-status-bar';
 import { Button, StyleSheet, Text, TextInput, View, Alert } from 'react-native';
 import Checkbox from 'expo-checkbox';
 
-export default function Start() {
+export default function Start({ registerInputHandler }) {
   const [nameInput, setNameInput] = useState('');
   const [emailInput, setEmailInput] = useState('');
   const [phoneInput, setPhoneInput] = useState('');
@@ -29,6 +29,8 @@ export default function Start() {
           { text: 'OK' }
         ]
       );
+    } else {
+      registerInputHandler({ name: nameInput, email: emailInput, phone: phoneInput });
     };
   };
 

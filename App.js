@@ -5,11 +5,17 @@ import Start from './screens/start/Start';
 import Confirm from './screens/confirm/Confirm';
 
 export default function App() {
+  const [userData, setUserData] = useState([]);
+
+  function handleRegisterInput(inputData) {
+    let newUser = { name: inputData.name, email: inputData.email, phone: inputData.phone };
+    setUserData(newUser);
+  };
 
   return (
     <View style={styles.container}>
       <StatusBar style="auto" />
-      <Start />
+      <Start registerInputHandler = {handleRegisterInput} />
       <Confirm />
     </View>
   );
