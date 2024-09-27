@@ -2,7 +2,7 @@ import { LinearGradient } from "expo-linear-gradient";
 import React, { useState } from "react";
 import { View, Text, Button, StyleSheet, Modal } from "react-native";
 
-export default function Confirm({ userData, showConfirm, goBackHandler }) {
+export default function Confirm({ userData, showConfirm, goBackHandler, continueHandler }) {
 
   return (
     <Modal
@@ -22,10 +22,13 @@ export default function Confirm({ userData, showConfirm, goBackHandler }) {
             <Text>{userData.phone}</Text>
             <Text>If it is not correct, please go back and edit them.</Text>
 
+            {/* continue to game */}
             <Button
               title="Continue"
+              onPress={continueHandler}
             />
 
+            {/* go back to start screen / register */}
             <Button
               title="Go Back"
               onPress={goBackHandler}
