@@ -1,3 +1,4 @@
+import { LinearGradient } from "expo-linear-gradient";
 import React, { useState } from "react";
 import { View, Text, Button, StyleSheet, Modal } from "react-native";
 
@@ -9,6 +10,10 @@ export default function Confirm({ userData, showConfirm }) {
       transparent={true}
       visible={showConfirm}
     >
+      <LinearGradient
+        colors={['skyblue', 'transparent']}
+        style={styles.container}
+      >
         <View style={styles.container}>
           <View style={styles.modal}>
             <Text>Hello {userData.name}</Text>
@@ -27,6 +32,7 @@ export default function Confirm({ userData, showConfirm }) {
 
           </View>
         </View>
+      </LinearGradient>
     </Modal>
   );
 }
