@@ -16,7 +16,7 @@ export default function App() {
     <View style={styles.container}>
       <StatusBar style="auto" />
       <Start registerInputHandler = {handleRegisterInput} />
-      <Confirm />
+      { userData.length === 0 ? null : <Confirm userData = {userData} />}
     </View>
   );
 }
