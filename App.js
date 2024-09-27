@@ -3,6 +3,7 @@ import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, View } from 'react-native';
 import Start from './screens/start/Start';
 import Confirm from './screens/confirm/Confirm';
+import { LinearGradient } from 'expo-linear-gradient';
 
 export default function App() {
   const [userData, setUserData] = useState([]);
@@ -15,18 +16,19 @@ export default function App() {
   };
 
   return (
-    <View style={styles.container}>
-      <StatusBar style="auto" />
-      <Start registerInputHandler={handleRegisterInput} />
-      {userData.length === 0 ? null : <Confirm userData={userData} showConfirm={showConfirm} />}
-    </View>
+    <LinearGradient colors={['lightblue', 'mediumpurple']} style={styles.container}>
+      <View style={styles.container}>
+        <StatusBar style="auto" />
+        <Start registerInputHandler={handleRegisterInput} />
+        {userData.length === 0 ? null : <Confirm userData={userData} showConfirm={showConfirm} />}
+      </View >
+    </LinearGradient>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
   },
