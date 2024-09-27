@@ -33,9 +33,9 @@ export default function App() {
     <LinearGradient colors={['lightblue', 'mediumpurple']} style={styles.container}>
       <View style={styles.container}>
         <StatusBar style="auto" />
-        <Start registerInputHandler={handleRegisterInput} />
-        <Confirm userData={userData} showConfirm={showConfirm} goBackHandler={handleConfirmGoBack} />
-        <Game guessMultiple={guessMultiple}/> 
+        { !showGame ? <Start registerInputHandler={handleRegisterInput} /> : null }
+        <Confirm userData={userData} showConfirm={showConfirm} goBackHandler={handleConfirmGoBack} continueHandler={handleConfirmContinue}/>
+        { showGame ? <Game guessMultiple={guessMultiple}/> : null }
       </View >
     </LinearGradient>
   );
