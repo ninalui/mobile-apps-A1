@@ -26,13 +26,16 @@ export default function App() {
     setShowGame(true);
   };
 
+  //  guess multiple is last number of user's phone number
+  const guessMultiple = userData.phone % 10;
+
   return (
     <LinearGradient colors={['lightblue', 'mediumpurple']} style={styles.container}>
       <View style={styles.container}>
         <StatusBar style="auto" />
         <Start registerInputHandler={handleRegisterInput} />
         <Confirm userData={userData} showConfirm={showConfirm} goBackHandler={handleConfirmGoBack} />
-        <Game /> 
+        <Game guessMultiple={guessMultiple}/> 
       </View >
     </LinearGradient>
   );
