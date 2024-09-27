@@ -20,7 +20,7 @@ export default function App() {
       <View style={styles.container}>
         <StatusBar style="auto" />
         <Start registerInputHandler={handleRegisterInput} />
-        {userData.length === 0 ? null : <Confirm userData={userData} showConfirm={showConfirm} />}
+        <Confirm userData={userData} showConfirm={showConfirm} />
       </View >
     </LinearGradient>
   );
