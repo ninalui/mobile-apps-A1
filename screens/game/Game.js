@@ -24,8 +24,6 @@ export default function Game({ guessMultiple }) {
 
   function startGame() {
     setIsGameStarted(true);
-    console.log('Game started', isGameStarted);
-    console.log('no guess', isGuessSubmitted);
     getRandomNumber();
   };
 
@@ -83,7 +81,7 @@ export default function Game({ guessMultiple }) {
           />}
 
         {/* if game is over or user makes a guess, show result */}
-        {isGameStarted && (isGameOver || isGuessSubmitted) && <GameResult result={guessResult} />}
+        {isGameStarted && (isGameOver || isGuessSubmitted) && <GameResult guessResult={guessResult} />}
 
       </View>
     </View>
