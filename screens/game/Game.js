@@ -50,6 +50,7 @@ export default function Game({ guessMultiple }) {
         } else {
           setGuessResult('lower');
         }
+        setAttemptsLeft(attemptsLeft - 1);
         setIsGuessSubmitted(true);
       }
     }
