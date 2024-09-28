@@ -1,14 +1,10 @@
 import React, { useState } from "react";
-import { View, Text, Button, TextInput, Alert} from "react-native";
+import { View, Text, Button, TextInput } from "react-native";
 
-export default function GamePrompts({ number, guessMultiple }) {
+export default function GamePrompts({ number, attemptsLeft, timeLeft, submitHandler }) {
   const [guess, setGuess] = useState('');
-
   const [hint, setHint] = useState('');
-  const [isHintUsed, setIsHintUsed] = useState(false);  
-  
-  const [attemptsLeft, setAttemptsLeft] = useState(4);
-  const [timeLeft, setTimeLeft] = useState(60);
+  const [isHintUsed, setIsHintUsed] = useState(false);
 
   // give user a hint about the range of the number
   function getHint() {
@@ -20,35 +16,30 @@ export default function GamePrompts({ number, guessMultiple }) {
     setIsHintUsed(true);
   };
 
-  function checkGuess() {
-    // check if guess is multiple of number
-    if (!guess % guessMultiple === 0) {
-      Alert.alert(
-        'Invalid number!',
-        'Number has to be a multiple of ' + guessMultiple + ' between 1 and 100',
-        [
-          { text: 'OK' }
-        ]
-      );
-    }
+  function handleSubmit() {
+    submitHandler(guess);
   };
 
   return (
     <View>
       <TextInput
         value={guess}
-        onChangeText={(text) => setGuess(text)}
+        onChangeText={(guess) => setGuess(guess)}
       />
       {/* show hint only if user has used it */}
       {hint ? <Text>{hint}</Text> : null}
-      
+
+      {/* FOR TESTING -- REMOVE LATER */}
+      <Text> {number} </Text>
+
       <Text>Attempts left: {attemptsLeft}</Text>
       <Text>Timer: {timeLeft}</Text>
 
       {/* disabled after user presses once */}
       <Button title="Use a Hint" onPress={getHint} disabled={isHintUsed} />
 
-      <Button title="Submit Guess" onPress={checkGuess}/>
+      <Button title="Submit Guess" onPress={handleSubmit} />
+
     </View>
   );
 } 
