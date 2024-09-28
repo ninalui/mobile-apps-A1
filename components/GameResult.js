@@ -1,7 +1,7 @@
 import React from "react";
 import { View, Text, Button, Image, StyleSheet } from "react-native";
 
-export default function GameResult({ guessResult, attemptsUsed, number }) {
+export default function GameResult({ guessResult, attemptsUsed, number, tryAgainHandler }) {
   const imageUrl = `https://picsum.photos/id/${number}/100/100`;
   return (
     <View>
@@ -15,8 +15,8 @@ export default function GameResult({ guessResult, attemptsUsed, number }) {
       ) : (
         <>
           <Text>You did not guess correct!</Text>
-          <Text>You should guess {guessResult}</Text>
-          <Button title="Try Again" />
+          <Text>You should guess {guessResult}.</Text>
+          <Button title="Try Again" onPress={tryAgainHandler} />
           <Button title="End the game" />
         </>
       )}

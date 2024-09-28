@@ -62,6 +62,12 @@ export default function Game({ guessMultiple }) {
     checkGuess(guess);
   };
 
+  function handleTryAgain() {
+    setIsGuessSubmitted(false);
+    setGuessResult('');
+    setGuess(0);
+  }
+
   return (
     <View style={styles.container}>
 
@@ -75,7 +81,7 @@ export default function Game({ guessMultiple }) {
         {!isGameStarted && <Button title="Start Game" onPress={startGame} />}
 
         {/* if game is started, show prompts until user submits a guess */}
-        {isGameStarted && !isGameOver && !isGuessSubmitted 
+        {isGameStarted && !isGameOver && !isGuessSubmitted
           && <GamePrompts
             number={number}
             attemptsLeft={attemptsLeft}
@@ -84,7 +90,13 @@ export default function Game({ guessMultiple }) {
           />}
 
         {/* if game is over or user makes a guess, show result */}
-        {isGameStarted && (isGameOver || isGuessSubmitted) && <GameResult guessResult={guessResult} attemptsUsed={attemptsUsed} number={number}/>}
+        {isGameStarted && (isGameOver || isGuessSubmitted)
+          && <GameResult
+            guessResult={guessResult}
+            attemptsUsed={attemptsUsed}
+            number={number}
+            tryAgainHandler={handleTryAgain}
+          />}
 
       </View>
     </View>
