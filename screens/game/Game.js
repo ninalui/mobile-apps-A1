@@ -31,7 +31,7 @@ export default function Game({ guessMultiple }) {
         <Text>Guess a number between 1 & 100 that is multiple of {guessMultiple}</Text>
 
         {/* if game is started, show prompts, otherwise show start button */}
-        {isGameStarted ? <GamePrompts /> : <Button title="Start" onPress={startGame} />}
+        {isGameStarted ? <GamePrompts number={number} /> : <Button title="Start" onPress={startGame} />}
       
       </View>
     </View>
