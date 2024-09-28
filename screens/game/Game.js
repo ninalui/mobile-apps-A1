@@ -6,6 +6,7 @@ import GameResult from "../../components/GameResult";
 export default function Game({ guessMultiple }) {
   const [number, setNumber] = useState(0);
   const [attemptsLeft, setAttemptsLeft] = useState(4);
+  const [attemptsUsed, setAttemptsUsed] = useState(0);
   const [timeLeft, setTimeLeft] = useState(60);
 
   const [guess, setGuess] = useState(0);
@@ -38,6 +39,10 @@ export default function Game({ guessMultiple }) {
         ]
       );
     } else {
+      setAttemptsLeft(attemptsLeft - 1);
+      setAttemptsUsed(attemptsUsed + 1);
+      setIsGuessSubmitted(true);
+
       // check if guess is correct
       if (guess == number) {
         setGuessResult('correct');
@@ -48,8 +53,6 @@ export default function Game({ guessMultiple }) {
         } else {
           setGuessResult('lower');
         }
-        setAttemptsLeft(attemptsLeft - 1);
-        setIsGuessSubmitted(true);
       }
     }
   };
@@ -72,7 +75,7 @@ export default function Game({ guessMultiple }) {
         {!isGameStarted && <Button title="Start Game" onPress={startGame} />}
 
         {/* if game is started, show prompts until user submits a guess */}
-        {isGameStarted && !isGuessSubmitted
+        {isGameStarted && !isGameOver && !isGuessSubmitted 
           && <GamePrompts
             number={number}
             attemptsLeft={attemptsLeft}
@@ -81,7 +84,7 @@ export default function Game({ guessMultiple }) {
           />}
 
         {/* if game is over or user makes a guess, show result */}
-        {isGameStarted && (isGameOver || isGuessSubmitted) && <GameResult guessResult={guessResult} />}
+        {isGameStarted && (isGameOver || isGuessSubmitted) && <GameResult guessResult={guessResult} attemptsUsed={attemptsUsed} number={number}/>}
 
       </View>
     </View>
