@@ -6,6 +6,7 @@ export default function GamePrompts({ number }) {
   const [attemptsLeft, setAttemptsLeft] = useState(4);
   const [timeLeft, setTimeLeft] = useState(60);
   const [hint, setHint] = useState('');
+  const [isHintUsed, setIsHintUsed] = useState(false);
 
   // give user a hint about the range of the number
   function getHint() {
@@ -14,6 +15,7 @@ export default function GamePrompts({ number }) {
     } else {
       setHint('The number is greater than 50');
     }
+    setIsHintUsed(true);
   };
 
   return (
@@ -27,7 +29,8 @@ export default function GamePrompts({ number }) {
       <Text>Attempts left: {attemptsLeft}</Text>
       <Text>Timer: {timeLeft}</Text>
 
-      <Button title="Use a Hint" onPress={getHint} />
+      {/* disabled after user presses once */}
+      <Button title="Use a Hint" onPress={getHint} disabled={isHintUsed} />
 
       <Button title="Submit Guess" />
     </View>
