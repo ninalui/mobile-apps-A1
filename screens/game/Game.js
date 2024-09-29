@@ -87,8 +87,10 @@ export default function Game({ guessMultiple }) {
     setIsGameOver(true);
     if (attemptsLeft == 0) {
       setGameOverReason('attempts');
-    } else {
+    } else if (timeLeft == 0) {
       setGameOverReason('time');
+    } else {
+      setGameOverReason('userQuit');
     }
   };
 
@@ -121,6 +123,7 @@ export default function Game({ guessMultiple }) {
             number={number}
             tryAgainHandler={handleTryAgain}
             newGameHandler={handleNewGame}
+            endGameHandler={handleEndGame}
           />}
 
         {/* if out of attempts or time, showw game is over */}

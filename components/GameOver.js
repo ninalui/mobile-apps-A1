@@ -5,7 +5,7 @@ export default function GameOver({ newGameHandler, gameOverReason }) {
     <View>
       <Text>The game is over!</Text>
       <Image style={styles.image} source={require('../assets/sademoji.png')} />
-      <Text>You are out of {gameOverReason}</Text>
+      {gameOverReason === 'userQuit' ? null : <Text>You are out of {gameOverReason}.</Text>}
       <Button title="New Game" onPress={newGameHandler} />
     </View>
   );
