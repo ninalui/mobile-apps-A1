@@ -10,6 +10,8 @@ export default function Game({ guessMultiple, restartHandler }) {
   const [attemptsLeft, setAttemptsLeft] = useState(4);
   const [attemptsUsed, setAttemptsUsed] = useState(0);
   const [timeLeft, setTimeLeft] = useState(60);
+  const [hint, setHint] = useState('');
+  const [isHintUsed, setIsHintUsed] = useState(false);
   const [gameOverReason, setGameOverReason] = useState('');
 
   const [guess, setGuess] = useState(0);
@@ -51,6 +53,8 @@ export default function Game({ guessMultiple, restartHandler }) {
     setIsGameStarted(true);
     setAttemptsLeft(4);
     setTimeLeft(60);
+    setIsHintUsed(false);
+    setAttemptsUsed(0);
     setIsGameOver(false);
     setIsGuessSubmitted(false);
     getRandomNumber();
@@ -110,6 +114,16 @@ export default function Game({ guessMultiple, restartHandler }) {
     }
   };
 
+  // give user a hint about the range of the number
+  function handleGetHint() {
+    if (number >= 50) {
+      setHint('The number is between 50 and 100');
+    } else {
+      setHint('The number is between 1 and 50');
+    };
+    setIsHintUsed(true);
+  };
+
   return (
     <View style={globalStyles.container}>
 
@@ -142,6 +156,9 @@ export default function Game({ guessMultiple, restartHandler }) {
             attemptsLeft={attemptsLeft}
             timeLeft={timeLeft}
             submitHandler={handleSubmitGuess}
+            hintHandler={handleGetHint}
+            isHintUsed={isHintUsed}
+            hint={hint}
           />}
 
         {/* if game is over or user makes a guess, show result */}

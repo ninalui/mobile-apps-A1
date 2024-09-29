@@ -2,26 +2,8 @@ import React, { useState } from "react";
 import { View, Text, Button, TextInput, StyleSheet } from "react-native";
 import { globalStyles } from "../styles";
 
-export default function GamePrompts({ number, attemptsLeft, timeLeft, submitHandler }) {
+export default function GamePrompts({ number, attemptsLeft, timeLeft, submitHandler, hintHandler, isHintUsed, hint}) {
   const [guess, setGuess] = useState('');
-  const [hint, setHint] = useState('');
-  const [isHintUsed, setIsHintUsed] = useState(false);
-
-  // give user a hint about the range of the number
-  function getHint() {
-
-    console.log('number:', number);
-    if (number < 50) {
-      setHint('The number is less than 50');
-    } else {
-      setHint('The number is greater than 50');
-    }
-    setIsHintUsed(true);
-  };
-
-  function handleSubmit() {
-    submitHandler(guess);
-  };
 
   return (
     <View style={globalStyles.childContainer}>
@@ -47,7 +29,7 @@ export default function GamePrompts({ number, attemptsLeft, timeLeft, submitHand
         <Button
           color='mediumblue'
           title="Use a Hint"
-          onPress={getHint}
+          onPress={hintHandler}
           disabled={isHintUsed}
         />
       </View>
@@ -55,7 +37,7 @@ export default function GamePrompts({ number, attemptsLeft, timeLeft, submitHand
         <Button
           color='mediumblue'
           title="Submit Guess"
-          onPress={handleSubmit}
+          onPress={() => submitHandler(guess)}
         />
       </View>
 
