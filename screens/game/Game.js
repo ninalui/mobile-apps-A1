@@ -6,6 +6,7 @@ import GameOver from "../../components/GameOver";
 import { globalStyles } from "../../styles";
 
 export default function Game({ guessMultiple, restartHandler }) {
+  // game variable states
   const [number, setNumber] = useState(0);
   const [attemptsLeft, setAttemptsLeft] = useState(4);
   const [attemptsUsed, setAttemptsUsed] = useState(0);
@@ -14,9 +15,11 @@ export default function Game({ guessMultiple, restartHandler }) {
   const [isHintUsed, setIsHintUsed] = useState(false);
   const [gameOverReason, setGameOverReason] = useState('');
 
+  // user guess states
   const [guess, setGuess] = useState(0);
   const [guessResult, setGuessResult] = useState('');
 
+  // game states
   const [isGameStarted, setIsGameStarted] = useState(false);
   const [isGameOver, setIsGameOver] = useState(false);
   const [isGuessSubmitted, setIsGuessSubmitted] = useState(false);
@@ -28,12 +31,14 @@ export default function Game({ guessMultiple, restartHandler }) {
     setNumber(multiplier * guessMultiple);
   };
 
+  // set game to end when time runs out
   useEffect(() => {
     if (timeLeft == 0) {
       handleEndGame();
     }
   }, [timeLeft]);
 
+  // start timer when game starts
   useEffect(() => {
     let timer;
     if (isGameStarted) {
@@ -42,6 +47,7 @@ export default function Game({ guessMultiple, restartHandler }) {
     return () => clearInterval(timer);
   }, [isGameStarted]);
 
+  // timer function to decrease time by 1 second
   function startTimer() {
     const timer = setInterval(() => {
       setTimeLeft((prevTime) => prevTime - 1);
@@ -49,17 +55,21 @@ export default function Game({ guessMultiple, restartHandler }) {
     return timer;
   }
 
+  // reset game variables and start a new game
   function startGame() {
     setIsGameStarted(true);
     setAttemptsLeft(4);
     setTimeLeft(60);
     setIsHintUsed(false);
+    setHint('');
     setAttemptsUsed(0);
     setIsGameOver(false);
     setIsGuessSubmitted(false);
+    setGuessResult('');
     getRandomNumber();
   };
 
+  // check the user's guess - is it valid, is it correct 
   function checkGuess(guess) {
     // check if guess is multiple of number
     if (guess % guessMultiple != 0) {
@@ -71,6 +81,7 @@ export default function Game({ guessMultiple, restartHandler }) {
         ]
       );
     } else {
+      // update attempts and guess submitted
       setAttemptsLeft(attemptsLeft - 1);
       setAttemptsUsed(attemptsUsed + 1);
       setIsGuessSubmitted(true);
@@ -78,6 +89,7 @@ export default function Game({ guessMultiple, restartHandler }) {
       // check if guess is correct
       if (guess == number) {
         setGuessResult('correct');
+      // provide feedback on guess
       } else {
         if (guess < number) {
           setGuessResult('higher');
@@ -88,11 +100,13 @@ export default function Game({ guessMultiple, restartHandler }) {
     }
   };
 
+  // handle when the user submits a guess
   function handleSubmitGuess(guess) {
     setGuess(guess);
     checkGuess(guess);
   };
 
+  // handle when user wants to try again after a guess
   function handleTryAgain() {
     if (attemptsLeft == 0 || timeLeft == 0) {
       handleEndGame();
@@ -103,12 +117,16 @@ export default function Game({ guessMultiple, restartHandler }) {
     }
   };
 
+  // handle ending the game
   function handleEndGame() {
     setIsGameOver(true);
+    // out of attempts
     if (attemptsLeft == 0) {
       setGameOverReason('attempts');
+    // out of time
     } else if (timeLeft == 0) {
       setGameOverReason('time');
+    // user quits
     } else {
       setGameOverReason('userQuit');
     }
@@ -127,7 +145,7 @@ export default function Game({ guessMultiple, restartHandler }) {
   return (
     <View style={globalStyles.container}>
 
-      {/* take user back to start screen and reset all information */}
+      {/* take user back to start screen and resets all information */}
       <View style={styles.restartButtonPosition}>
         <Button
           title="Restart"
@@ -135,6 +153,7 @@ export default function Game({ guessMultiple, restartHandler }) {
       </View>
 
       <View style={globalStyles.card}>
+        {/* show game prompt while on game's start and input prompt screen */}
         {!isGameOver && !isGuessSubmitted
           && <Text style={globalStyles.textColor}>Guess a number between 1 & 100 that is multiple of {guessMultiple}</Text>}
 
@@ -149,7 +168,7 @@ export default function Game({ guessMultiple, restartHandler }) {
           </View>
         }
 
-        {/* if game is started, show prompts until user submits a guess */}
+        {/* if game has started, show prompts until user submits a guess */}
         {isGameStarted && !isGameOver && !isGuessSubmitted
           && <GamePrompts
             number={number}
@@ -161,7 +180,7 @@ export default function Game({ guessMultiple, restartHandler }) {
             hint={hint}
           />}
 
-        {/* if game is over or user makes a guess, show result */}
+        {/* if user makes a guess, show result */}
         {isGameStarted && isGuessSubmitted && !isGameOver
           && <GameResult
             guessResult={guessResult}
