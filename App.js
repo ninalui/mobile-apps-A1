@@ -26,6 +26,11 @@ export default function App() {
     setShowGame(true);
   };
 
+  function handleResetGame() {
+    setShowGame(false);
+    setUserData([]);
+  };
+
   //  guess multiple is last number of user's phone number
   const guessMultiple = userData.phone % 10;
 
@@ -35,7 +40,7 @@ export default function App() {
         <StatusBar style="auto" />
         { !showGame ? <Start registerInputHandler={handleRegisterInput} /> : null }
         <Confirm userData={userData} showConfirm={showConfirm} goBackHandler={handleConfirmGoBack} continueHandler={handleConfirmContinue}/>
-        { showGame ? <Game guessMultiple={guessMultiple}/> : null }
+        { showGame ? <Game guessMultiple={guessMultiple} restartHandler={handleResetGame}/> : null }
       </View >
     </LinearGradient>
   );

@@ -4,7 +4,7 @@ import GamePrompts from "../../components/GamePrompts";
 import GameResult from "../../components/GameResult";
 import GameOver from "../../components/GameOver";
 
-export default function Game({ guessMultiple }) {
+export default function Game({ guessMultiple, restartHandler }) {
   const [number, setNumber] = useState(0);
   const [attemptsLeft, setAttemptsLeft] = useState(4);
   const [attemptsUsed, setAttemptsUsed] = useState(0);
@@ -98,7 +98,7 @@ export default function Game({ guessMultiple }) {
     <View style={styles.container}>
 
       {/* take user back to start screen and reset all information */}
-      <Button title="Restart" />
+      <Button title="Restart" onPress={restartHandler} />
 
       <View style={styles.card}>
         {!isGameStarted && <Text>Guess a number between 1 & 100 that is multiple of {guessMultiple}</Text>}
