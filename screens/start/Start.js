@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { StatusBar } from 'expo-status-bar';
 import { Button, StyleSheet, Text, TextInput, View, Alert } from 'react-native';
 import Checkbox from 'expo-checkbox';
+import { globalStyles } from '../../styles';
 
 export default function Start({ registerInputHandler }) {
   const [nameInput, setNameInput] = useState('');
@@ -35,57 +35,71 @@ export default function Start({ registerInputHandler }) {
   };
 
   return (
-    <View style={styles.container}>
-      <StatusBar style="auto" />
-      <Text>Welcome</Text>
-
-      <View style={styles.card}>
-        <Text>Name:</Text>
+    <View style={globalStyles.container}>
+      <Text style={styles.welcomeText}>Welcome</Text>
+      <View style={globalStyles.card}>
+        <Text style={globalStyles.textColor}>Name:</Text>
         <TextInput
+          style={globalStyles.inputField}
           value={nameInput}
           onChangeText={(text) => {
             setNameInput(text);
             setValidName(text.length > 1 && !text.match(/\d/));
           }}
         />
-        {validName ? null : <Text>Please enter a valid name</Text>}
+        {validName ? <Text></Text> : <Text style={styles.errorMessage}>Please enter a valid name</Text>}
 
-        <Text>Email:</Text>
+        <Text style={globalStyles.textColor}>Email:</Text>
         <TextInput
+          style={globalStyles.inputField}
           value={emailInput}
           onChangeText={(text) => {
             setEmailInput(text);
             setValidEmail(text.includes('@') && text.includes('.'));
           }}
         />
-        {validEmail ? null : <Text>Please enter a valid email</Text>}
+        {validEmail ? <Text></Text> : <Text style={styles.errorMessage}>Please enter a valid email</Text>}
 
-        <Text>Phone number:</Text>
+        <Text style={globalStyles.textColor}>Phone number:</Text>
         <TextInput
+          style={globalStyles.inputField}
           value={phoneInput}
           onChangeText={(text) => {
             setPhoneInput(text);
             setValidPhone(text.length === 10 && !isNaN(text) && text[text.length - 1] !== '0' && text[text.length - 1] !== '1');
           }}
         />
-        {validPhone ? null : <Text>Please enter a valid phone number</Text>}
+        {validPhone ? <Text></Text> : <Text style={styles.errorMessage}>Please enter a valid phone number</Text>}
 
-        <Checkbox
-          value={isRobot}
-          onValueChange={setIsRobot}
-        />
-        <Text>I am not a robot</Text>
+        <View style={styles.checkBoxContainer}>
 
-        <Button
-          title='Reset'
-          onPress={clearInputs}
-        />
+            <Checkbox
+              value={isRobot}
+              onValueChange={setIsRobot}
+            />
+ 
+          <View style={{marginLeft: 10}}>
+            <Text style={globalStyles.textColor}>I am not a robot</Text>
+          </View>
+        </View>
 
-        <Button
-          title='Register'
-          disabled={!isRobot}
-          onPress={() => { checkInputs() }}
-        />
+        <View style={styles.buttonRow}>
+          <View style={{padding: 10}}>
+            <Button
+              title='Reset'
+              color='firebrick'
+              onPress={clearInputs}
+            />
+          </View>
+          <View style={{padding: 10}}>
+            <Button
+              title='Register'
+              color='mediumblue'
+              disabled={!isRobot}
+              onPress={() => { checkInputs() }}
+            />
+          </View>
+        </View>
 
       </View>
 
@@ -94,17 +108,23 @@ export default function Start({ registerInputHandler }) {
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
+  welcomeText: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    color: 'indigo',
+    marginBottom: 20,
   },
-  card: {
-    padding: 10,
-    margin: 10,
-    borderWidth: 1,
-    borderRadius: 10,
-    borderColor: 'lightgrey',
-    backgroundColor: 'lightgrey',
+  checkBoxContainer: {
+    flexDirection: 'row',
+    marginTop: 10,
+  },
+  buttonRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginTop: 10,
+  },
+  errorMessage: {
+    color: 'dimgrey',
+    marginBottom: 10,
   }
 });
