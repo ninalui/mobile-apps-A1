@@ -9,6 +9,7 @@ export default function Game({ guessMultiple }) {
   const [attemptsLeft, setAttemptsLeft] = useState(4);
   const [attemptsUsed, setAttemptsUsed] = useState(0);
   const [timeLeft, setTimeLeft] = useState(60);
+  const [gameOverReason, setGameOverReason] = useState('');
 
   const [guess, setGuess] = useState(0);
   const [guessResult, setGuessResult] = useState('');
@@ -30,10 +31,6 @@ export default function Game({ guessMultiple }) {
   };
 
   function checkGuess(guess) {
-    if (attemptsLeft == 0 || timeLeft == 0) {
-      handleEndGame();
-      return;
-    };
     // check if guess is multiple of number
     if (guess % guessMultiple != 0) {
       Alert.alert(
@@ -68,9 +65,13 @@ export default function Game({ guessMultiple }) {
   };
 
   function handleTryAgain() {
-    setIsGuessSubmitted(false);
-    setGuessResult('');
-    setGuess(0);
+    if (attemptsLeft == 0 || timeLeft == 0) {
+      handleEndGame();
+    } else {
+      setIsGuessSubmitted(false);
+      setGuessResult('');
+      setGuess(0);
+    }
   };
 
   function handleNewGame() {
@@ -84,6 +85,11 @@ export default function Game({ guessMultiple }) {
 
   function handleEndGame() {
     setIsGameOver(true);
+    if (attemptsLeft == 0) {
+      setGameOverReason('attempts');
+    } else {
+      setGameOverReason('time');
+    }
   };
 
   return (
@@ -108,7 +114,7 @@ export default function Game({ guessMultiple }) {
           />}
 
         {/* if game is over or user makes a guess, show result */}
-        {isGameStarted && isGuessSubmitted
+        {isGameStarted && isGuessSubmitted && !isGameOver
           && <GameResult
             guessResult={guessResult}
             attemptsUsed={attemptsUsed}
@@ -118,7 +124,7 @@ export default function Game({ guessMultiple }) {
           />}
 
         {/* if out of attempts or time, showw game is over */}
-        {isGameOver && <GameOver newGameHandler={handleNewGame} />}
+        {isGameOver && <GameOver newGameHandler={handleNewGame} gameOverReason={gameOverReason} />}
 
       </View>
     </View>
