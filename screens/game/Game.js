@@ -49,6 +49,10 @@ export default function Game({ guessMultiple, restartHandler }) {
 
   function startGame() {
     setIsGameStarted(true);
+    setAttemptsLeft(4);
+    setTimeLeft(60);
+    setIsGameOver(false);
+    setIsGuessSubmitted(false);
     getRandomNumber();
   };
 
@@ -93,15 +97,6 @@ export default function Game({ guessMultiple, restartHandler }) {
       setGuessResult('');
       setGuess(0);
     }
-  };
-
-  function handleNewGame() {
-    getRandomNumber();
-    setAttemptsLeft(4);
-    setAttemptsUsed(0);
-    setTimeLeft(60);
-    setIsGameOver(false);
-    setIsGuessSubmitted(false);
   };
 
   function handleEndGame() {
@@ -161,7 +156,7 @@ export default function Game({ guessMultiple, restartHandler }) {
           />}
 
         {/* if out of attempts or time, showw game is over */}
-        {isGameOver && <GameOver newGameHandler={handleNewGame} gameOverReason={gameOverReason} />}
+        {isGameOver && <GameOver newGameHandler={startGame} gameOverReason={gameOverReason} />}
 
       </View>
     </View >
