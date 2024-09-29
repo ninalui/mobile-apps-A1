@@ -1,40 +1,49 @@
 import { LinearGradient } from "expo-linear-gradient";
-import React, { useState } from "react";
+import React from "react";
 import { View, Text, Button, StyleSheet, Modal } from "react-native";
+import { globalStyles } from '../../styles';
 
 export default function Confirm({ userData, showConfirm, goBackHandler, continueHandler }) {
 
   return (
     <Modal
-      animationType="slide"
+      animationType='slide'
       transparent={true}
       visible={showConfirm}
     >
       <LinearGradient
         colors={['skyblue', 'transparent']}
-        style={styles.container}
+        style={globalStyles.container}
       >
-        <View style={styles.container}>
-          <View style={styles.modal}>
-            <Text>Hello {userData.name}</Text>
-            <Text>Here is the information you entered:</Text>
-            <Text>{userData.email}</Text>
-            <Text>{userData.phone}</Text>
-            <Text>If it is not correct, please go back and edit them.</Text>
+        <View style={styles.modal}>
+          {/* show the data that the user entered */}
+          <Text style={globalStyles.textColor}>
+            Hello {userData.name}{'\n'}
+            Here is the information you entered:{'\n'}
+            {userData.email}{'\n'}
+            {userData.phone}{'\n'}
+            If it is not correct, please go back and edit them.
+          </Text>
 
+          <View style={globalStyles.buttonRow}>
+            {/* go back to start screen/register */}
+            <View style={{ padding: 10 }}>
+              <Button
+                title='Go Back'
+                color='firebrick'
+                onPress={goBackHandler}
+              />
+            </View>
             {/* continue to game */}
-            <Button
-              title="Continue"
-              onPress={continueHandler}
-            />
-
-            {/* go back to start screen / register */}
-            <Button
-              title="Go Back"
-              onPress={goBackHandler}
-            />
-
+            <View style={{ padding: 10 }}>
+              <Button
+                title='Continue'
+                color='mediumblue'
+                onPress={continueHandler}
+              />
+            </View>
           </View>
+
         </View>
       </LinearGradient>
     </Modal>
@@ -42,17 +51,12 @@ export default function Confirm({ userData, showConfirm, goBackHandler, continue
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
   modal: {
     padding: 10,
     margin: 10,
     borderWidth: 1,
     borderRadius: 10,
-    borderColor: 'lightgrey',
-    backgroundColor: 'lightgrey',
+    borderColor: 'darkgrey',
+    backgroundColor: 'darkgrey',
   }
 });

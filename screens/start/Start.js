@@ -83,7 +83,7 @@ export default function Start({ registerInputHandler }) {
           </View>
         </View>
 
-        <View style={styles.buttonRow}>
+        <View style={globalStyles.buttonRow}>
           <View style={{padding: 10}}>
             <Button
               title='Reset'
@@ -116,11 +116,6 @@ const styles = StyleSheet.create({
   },
   checkBoxContainer: {
     flexDirection: 'row',
-    marginTop: 10,
-  },
-  buttonRow: {
-    flexDirection: 'row',
-    alignItems: 'center',
     marginTop: 10,
   },
   errorMessage: {

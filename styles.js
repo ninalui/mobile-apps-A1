@@ -21,4 +21,10 @@ export const globalStyles = StyleSheet.create({
     borderBottomWidth: 2,
     borderColor: 'darkslateblue',
   },
+  buttonRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginTop: 10,
+  },
 });
