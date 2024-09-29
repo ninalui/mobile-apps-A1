@@ -66,7 +66,16 @@ export default function Game({ guessMultiple }) {
     setIsGuessSubmitted(false);
     setGuessResult('');
     setGuess(0);
-  }
+  };
+
+  function handleNewGame() {
+    getRandomNumber();
+    setAttemptsLeft(4);
+    setAttemptsUsed(0);
+    setTimeLeft(60);
+    setIsGameOver(false);
+    setIsGuessSubmitted(false);
+  };
 
   return (
     <View style={styles.container}>
@@ -96,6 +105,7 @@ export default function Game({ guessMultiple }) {
             attemptsUsed={attemptsUsed}
             number={number}
             tryAgainHandler={handleTryAgain}
+            newGameHandler={handleNewGame}
           />}
 
       </View>
