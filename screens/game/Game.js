@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { View, Text, Button, StyleSheet, Alert } from "react-native";
 import GamePrompts from "../../components/GamePrompts";
 import GameResult from "../../components/GameResult";
@@ -24,6 +24,27 @@ export default function Game({ guessMultiple, restartHandler }) {
     const multiplier = Math.floor(Math.random() * maxMultiple) + 1;
     setNumber(multiplier * guessMultiple);
   };
+
+  useEffect(() => {
+    if (timeLeft == 0) {
+      handleEndGame();
+    }
+  }, [timeLeft]);
+
+  useEffect(() => {
+    let timer;
+    if (isGameStarted) {
+      timer = startTimer();
+    }
+    return () => clearInterval(timer);
+  }, [isGameStarted]);
+
+  function startTimer() {
+    const timer = setInterval(() => {
+      setTimeLeft((prevTime) => prevTime - 1);
+    }, 1000);
+    return timer;
+  }
 
   function startGame() {
     setIsGameStarted(true);
