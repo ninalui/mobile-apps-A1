@@ -151,7 +151,7 @@ export default function Game({ guessMultiple, restartHandler }) {
             attemptsUsed={attemptsUsed}
             number={number}
             tryAgainHandler={handleTryAgain}
-            newGameHandler={handleNewGame}
+            newGameHandler={startGame}
             endGameHandler={handleEndGame}
           />}
 
