@@ -3,6 +3,7 @@ import { View, Text, Button, StyleSheet, Alert } from "react-native";
 import GamePrompts from "../../components/GamePrompts";
 import GameResult from "../../components/GameResult";
 import GameOver from "../../components/GameOver";
+import { globalStyles } from "../../styles";
 
 export default function Game({ guessMultiple, restartHandler }) {
   const [number, setNumber] = useState(0);
@@ -69,7 +70,6 @@ export default function Game({ guessMultiple, restartHandler }) {
       // check if guess is correct
       if (guess == number) {
         setGuessResult('correct');
-        setIsGameOver(true);
       } else {
         if (guess < number) {
           setGuessResult('higher');
@@ -116,16 +116,29 @@ export default function Game({ guessMultiple, restartHandler }) {
   };
 
   return (
-    <View style={styles.container}>
+    <View style={globalStyles.container}>
 
       {/* take user back to start screen and reset all information */}
-      <Button title="Restart" onPress={restartHandler} />
+      <View style={styles.restartButtonPosition}>
+        <Button
+          title="Restart"
+          onPress={restartHandler} />
+      </View>
 
-      <View style={styles.card}>
-        {!isGameStarted && <Text>Guess a number between 1 & 100 that is multiple of {guessMultiple}</Text>}
+      <View style={globalStyles.card}>
+        {!isGameOver && !isGuessSubmitted
+          && <Text style={globalStyles.textColor}>Guess a number between 1 & 100 that is multiple of {guessMultiple}</Text>}
 
         {/* show start button if game has not yet started */}
-        {!isGameStarted && <Button title="Start Game" onPress={startGame} />}
+        {!isGameStarted
+          && <View style={globalStyles.buttonRow}>
+            <Button
+              color='mediumblue'
+              title='Start'
+              onPress={startGame}
+            />
+          </View>
+        }
 
         {/* if game is started, show prompts until user submits a guess */}
         {isGameStarted && !isGameOver && !isGuessSubmitted
@@ -151,23 +164,14 @@ export default function Game({ guessMultiple, restartHandler }) {
         {isGameOver && <GameOver newGameHandler={handleNewGame} gameOverReason={gameOverReason} />}
 
       </View>
-    </View>
+    </View >
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
+  restartButtonPosition: {
+    alignSelf: 'flex-end',
+    marginBottom: 20,
   },
-  card: {
-    padding: 10,
-    margin: 10,
-    borderWidth: 1,
-    borderRadius: 10,
-    borderColor: 'lightgrey',
-    backgroundColor: 'lightgrey',
-  }
 });
 

@@ -6,6 +6,10 @@ export const globalStyles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
+  childContainer: {
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
   card: {
     padding: 10,
     margin: 10,
@@ -16,6 +20,9 @@ export const globalStyles = StyleSheet.create({
   },
   textColor: {
     color: 'darkslateblue',
+  },
+  textColorGrey: {
+    color: 'dimgrey',
   },
   inputField: {
     borderBottomWidth: 2,
