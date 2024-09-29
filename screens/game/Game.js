@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { View, Text, Button, StyleSheet, Alert } from "react-native";
 import GamePrompts from "../../components/GamePrompts";
 import GameResult from "../../components/GameResult";
+import GameOver from "../../components/GameOver";
 
 export default function Game({ guessMultiple }) {
   const [number, setNumber] = useState(0);
@@ -29,6 +30,10 @@ export default function Game({ guessMultiple }) {
   };
 
   function checkGuess(guess) {
+    if (attemptsLeft == 0 || timeLeft == 0) {
+      handleEndGame();
+      return;
+    };
     // check if guess is multiple of number
     if (guess % guessMultiple != 0) {
       Alert.alert(
@@ -77,6 +82,10 @@ export default function Game({ guessMultiple }) {
     setIsGuessSubmitted(false);
   };
 
+  function handleEndGame() {
+    setIsGameOver(true);
+  };
+
   return (
     <View style={styles.container}>
 
@@ -99,7 +108,7 @@ export default function Game({ guessMultiple }) {
           />}
 
         {/* if game is over or user makes a guess, show result */}
-        {isGameStarted && (isGameOver || isGuessSubmitted)
+        {isGameStarted && isGuessSubmitted
           && <GameResult
             guessResult={guessResult}
             attemptsUsed={attemptsUsed}
@@ -107,6 +116,9 @@ export default function Game({ guessMultiple }) {
             tryAgainHandler={handleTryAgain}
             newGameHandler={handleNewGame}
           />}
+
+        {/* if out of attempts or time, showw game is over */}
+        {isGameOver && <GameOver newGameHandler={handleNewGame} />}
 
       </View>
     </View>
