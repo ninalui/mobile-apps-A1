@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, View } from 'react-native';
+import { View } from 'react-native';
+import { LinearGradient } from 'expo-linear-gradient';
 import Start from './screens/start/Start';
 import Confirm from './screens/confirm/Confirm';
 import Game from './screens/game/Game';
-import { LinearGradient } from 'expo-linear-gradient';
+import { globalStyles } from './styles';
 
 export default function App() {
   const [userData, setUserData] = useState([]);
@@ -35,8 +36,8 @@ export default function App() {
   const guessMultiple = userData.phone % 10;
 
   return (
-    <LinearGradient colors={['lightblue', 'mediumpurple']} style={styles.container}>
-      <View style={styles.container}>
+    <LinearGradient colors={['lightblue', 'mediumpurple']} style={globalStyles.container}>
+      <View>
         <StatusBar style="auto" />
         { !showGame ? <Start registerInputHandler={handleRegisterInput} /> : null }
         <Confirm userData={userData} showConfirm={showConfirm} goBackHandler={handleConfirmGoBack} continueHandler={handleConfirmContinue}/>
@@ -45,11 +46,3 @@ export default function App() {
     </LinearGradient>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
