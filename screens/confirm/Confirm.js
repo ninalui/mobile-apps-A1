@@ -2,6 +2,7 @@ import { LinearGradient } from "expo-linear-gradient";
 import React from "react";
 import { View, Text, Button, StyleSheet, Modal } from "react-native";
 import { globalStyles } from '../../styles';
+import TwoButtons from '../../components/TwoButtons';
 
 export default function Confirm({ userData, showConfirm, goBackHandler, continueHandler }) {
 
@@ -25,24 +26,15 @@ export default function Confirm({ userData, showConfirm, goBackHandler, continue
             If it is not correct, please go back and edit them.
           </Text>
 
-          <View style={globalStyles.buttonRow}>
-            {/* go back to start screen/register */}
-            <View style={{ padding: 10 }}>
-              <Button
-                title='Go Back'
-                color='firebrick'
-                onPress={goBackHandler}
-              />
-            </View>
-            {/* continue to game */}
-            <View style={{ padding: 10 }}>
-              <Button
-                title='Continue'
-                color='mediumblue'
-                onPress={continueHandler}
-              />
-            </View>
-          </View>
+          {/* two buttons - go back to register form, continue to game*/}
+          <TwoButtons
+            title1='Go Back'
+            onPress1={goBackHandler}
+            color1='firebrick'
+            title2='Continue'
+            onPress2={continueHandler}
+            color2='mediumblue'
+          />
 
         </View>
       </LinearGradient>

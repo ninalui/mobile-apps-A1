@@ -1,6 +1,7 @@
 import React from "react";
 import { View, Text, Button, Image, StyleSheet } from "react-native";
 import { globalStyles } from "../styles";
+import GameButton from "./GameButton";
 
 export default function GameResult({ guessResult, attemptsUsed, number, tryAgainHandler, newGameHandler, endGameHandler }) {
   const imageUrl = `https://picsum.photos/id/${number}/100/100`;
@@ -20,9 +21,8 @@ export default function GameResult({ guessResult, attemptsUsed, number, tryAgain
             source={{ uri: imageUrl }}
           />
           </View>
-          <Button
-            color='mediumblue'
-            title="New Game"
+          <GameButton
+            title='New Game'
             onPress={newGameHandler}
           />
         </>
@@ -34,20 +34,14 @@ export default function GameResult({ guessResult, attemptsUsed, number, tryAgain
             You should guess {guessResult}.
           </Text>
 
-          <View style={globalStyles.buttonRow}>
-            <Button
-              color='mediumblue'
-              title="Try Again"
+            <GameButton
+              title='Try Again'
               onPress={tryAgainHandler}
             />
-          </View>
-          <View style={globalStyles.buttonRow}>
-            <Button
-              color='mediumblue'
-              title="End the game"
+            <GameButton
+              title='End the game'
               onPress={endGameHandler}
             />
-          </View>
         </>
       )
       }

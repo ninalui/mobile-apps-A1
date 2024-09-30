@@ -1,6 +1,7 @@
 import React from "react";
 import { View, Text, Button, Image, StyleSheet } from "react-native";
 import { globalStyles } from "../styles";
+import GameButton from "./GameButton";
 
 export default function GameOver({ newGameHandler, gameOverReason }) {
   return (
@@ -20,9 +21,8 @@ export default function GameOver({ newGameHandler, gameOverReason }) {
       }
 
       <View style={{ padding: 10 }}>
-        <Button
-          color='mediumblue'
-          title="New Game"
+        <GameButton
+          title='New Game'
           onPress={newGameHandler}
         />
       </View>

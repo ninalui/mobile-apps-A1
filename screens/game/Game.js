@@ -4,6 +4,7 @@ import GamePrompts from "../../components/GamePrompts";
 import GameResult from "../../components/GameResult";
 import GameOver from "../../components/GameOver";
 import { globalStyles } from "../../styles";
+import GameButton from "../../components/GameButton";
 
 export default function Game({ guessMultiple, restartHandler }) {
   // game variable states
@@ -89,7 +90,7 @@ export default function Game({ guessMultiple, restartHandler }) {
       // check if guess is correct
       if (guess == number) {
         setGuessResult('correct');
-      // provide feedback on guess
+        // provide feedback on guess
       } else {
         if (guess < number) {
           setGuessResult('higher');
@@ -123,10 +124,10 @@ export default function Game({ guessMultiple, restartHandler }) {
     // out of attempts
     if (attemptsLeft == 0) {
       setGameOverReason('attempts');
-    // out of time
+      // out of time
     } else if (timeLeft == 0) {
       setGameOverReason('time');
-    // user quits
+      // user quits
     } else {
       setGameOverReason('userQuit');
     }
@@ -155,17 +156,14 @@ export default function Game({ guessMultiple, restartHandler }) {
       <View style={globalStyles.card}>
         {/* show game prompt while on game's start and input prompt screen */}
         {!isGameOver && !isGuessSubmitted
-          && <Text style={globalStyles.textColor}>Guess a number between 1 & 100 that is multiple of {guessMultiple}</Text>}
+          && <Text style={globalStyles.textColor}>Guess a number between 1 & 100 that is multiple of {guessMultiple}.</Text>}
 
         {/* show start button if game has not yet started */}
         {!isGameStarted
-          && <View style={globalStyles.buttonRow}>
-            <Button
-              color='mediumblue'
-              title='Start'
-              onPress={startGame}
-            />
-          </View>
+          && <GameButton
+            title='Start'
+            onPress={startGame}
+          />
         }
 
         {/* if game has started, show prompts until user submits a guess */}

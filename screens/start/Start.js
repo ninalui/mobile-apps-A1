@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Button, StyleSheet, Text, TextInput, View, Alert } from 'react-native';
 import Checkbox from 'expo-checkbox';
 import { globalStyles } from '../../styles';
+import TwoButtons from '../../components/TwoButtons';
 
 export default function Start({ registerInputHandler }) {
   const [nameInput, setNameInput] = useState('');
@@ -72,37 +73,27 @@ export default function Start({ registerInputHandler }) {
         {validPhone ? <Text></Text> : <Text style={styles.errorMessage}>Please enter a valid phone number</Text>}
 
         <View style={styles.checkBoxContainer}>
+          <Checkbox
+            value={isRobot}
+            onValueChange={setIsRobot}
+          />
 
-            <Checkbox
-              value={isRobot}
-              onValueChange={setIsRobot}
-            />
- 
-          <View style={{marginLeft: 10}}>
+          <View style={{ marginLeft: 10 }}>
             <Text style={globalStyles.textColor}>I am not a robot</Text>
           </View>
         </View>
 
-        <View style={globalStyles.buttonRow}>
-          <View style={{padding: 10}}>
-            <Button
-              title='Reset'
-              color='firebrick'
-              onPress={clearInputs}
-            />
-          </View>
-          <View style={{padding: 10}}>
-            <Button
-              title='Register'
-              color='mediumblue'
-              disabled={!isRobot}
-              onPress={() => { checkInputs() }}
-            />
-          </View>
-        </View>
+        <TwoButtons 
+        title1='Reset' 
+        onPress1={clearInputs} 
+        color1='firebrick' 
+        title2='Register' 
+        onPress2={checkInputs} 
+        color2='mediumblue' 
+        disabled={!isRobot}
+        />
 
       </View>
-
     </View>
   );
 }
@@ -117,6 +108,7 @@ const styles = StyleSheet.create({
   checkBoxContainer: {
     flexDirection: 'row',
     marginTop: 10,
+    marginBottom: 10,
   },
   errorMessage: {
     color: 'dimgrey',

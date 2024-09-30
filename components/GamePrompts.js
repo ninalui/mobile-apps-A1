@@ -1,12 +1,14 @@
 import React, { useState } from "react";
 import { View, Text, Button, TextInput, StyleSheet } from "react-native";
 import { globalStyles } from "../styles";
+import GameButton from "./GameButton";
 
-export default function GamePrompts({ number, attemptsLeft, timeLeft, submitHandler, hintHandler, isHintUsed, hint}) {
+export default function GamePrompts({ number, attemptsLeft, timeLeft, submitHandler, hintHandler, isHintUsed, hint }) {
   const [guess, setGuess] = useState('');
 
   return (
     <View style={globalStyles.childContainer}>
+      {/* field for user to input their guess */}
       <TextInput
         style={[globalStyles.inputField, styles.guessInput]}
         value={guess}
@@ -16,6 +18,8 @@ export default function GamePrompts({ number, attemptsLeft, timeLeft, submitHand
       <View style={styles.textContainer}>
         {/* show hint only if user has used it */}
         {hint ? <Text>{hint}.</Text> : <Text />}
+
+        {/* show user attempts and time left */}
         <Text style={styles.textGrey}>
           Attempts left: {attemptsLeft}
         </Text>
@@ -24,23 +28,17 @@ export default function GamePrompts({ number, attemptsLeft, timeLeft, submitHand
         </Text>
       </View>
 
-      <View style={globalStyles.buttonRow}>
-        {/* disabled after user presses once */}
-        <Button
-          color='mediumblue'
-          title="Use a Hint"
-          onPress={hintHandler}
-          disabled={isHintUsed}
-        />
-      </View>
-      <View style={globalStyles.buttonRow}>
-        <Button
-          color='mediumblue'
-          title="Submit Guess"
-          onPress={() => submitHandler(guess)}
-        />
-      </View>
-
+      {/* hint button - disabled after user presses once */}
+      <GameButton
+        title='Use a Hint'
+        onPress={hintHandler}
+        disabled={isHintUsed}
+      />
+      {/* submit guess button */}
+      <GameButton
+        title='Submit Guess'
+        onPress={() => submitHandler(guess)}
+      />
     </View>
   );
 }
