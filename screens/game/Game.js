@@ -4,6 +4,7 @@ import GamePrompts from "../../components/GamePrompts";
 import GameResult from "../../components/GameResult";
 import GameOver from "../../components/GameOver";
 import { globalStyles } from "../../styles";
+import Card from "../../components/Card";
 import GameButton from "../../components/GameButton";
 
 export default function Game({ guessMultiple, restartHandler }) {
@@ -153,7 +154,7 @@ export default function Game({ guessMultiple, restartHandler }) {
           onPress={restartHandler} />
       </View>
 
-      <View style={globalStyles.card}>
+      <Card>
         {/* show game prompt while on game's start and input prompt screen */}
         {!isGameOver && !isGuessSubmitted
           && <Text style={globalStyles.textColor}>Guess a number between 1 & 100 that is multiple of {guessMultiple}.</Text>}
@@ -192,7 +193,7 @@ export default function Game({ guessMultiple, restartHandler }) {
         {/* if out of attempts or time, showw game is over */}
         {isGameOver && <GameOver newGameHandler={startGame} gameOverReason={gameOverReason} />}
 
-      </View>
+      </Card>
     </View >
   );
 }

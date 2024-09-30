@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { Button, StyleSheet, Text, TextInput, View, Alert } from 'react-native';
-import Checkbox from 'expo-checkbox';
+import { StyleSheet, Text, View, Alert } from 'react-native';
 import { globalStyles } from '../../styles';
+import Card from '../../components/Card';
 import StartInput from '../../components/StartInput';
 import CheckBoxField from '../../components/CheckBoxField';
 import TwoButtons from '../../components/TwoButtons';
@@ -40,7 +40,7 @@ export default function Start({ registerInputHandler }) {
   return (
     <View style={globalStyles.container}>
       <Text style={styles.welcomeText}>Welcome</Text>
-      <View style={globalStyles.card}>
+      <Card>
         {/* name input */}
         <StartInput
           label={'Name:'}
@@ -94,7 +94,7 @@ export default function Start({ registerInputHandler }) {
           disabled={!isRobot}
         />
 
-      </View>
+      </Card>
     </View>
   );
 }

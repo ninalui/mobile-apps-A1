@@ -1,7 +1,8 @@
 import { LinearGradient } from "expo-linear-gradient";
 import React from "react";
-import { View, Text, Button, StyleSheet, Modal } from "react-native";
+import { Text, StyleSheet, Modal } from "react-native";
 import { globalStyles } from '../../styles';
+import Card from '../../components/Card';
 import TwoButtons from '../../components/TwoButtons';
 
 export default function Confirm({ userData, showConfirm, goBackHandler, continueHandler }) {
@@ -16,7 +17,7 @@ export default function Confirm({ userData, showConfirm, goBackHandler, continue
         colors={['skyblue', 'transparent']}
         style={globalStyles.container}
       >
-        <View style={styles.modal}>
+        <Card>
           {/* show the data that the user entered */}
           <Text style={globalStyles.textColor}>
             Hello {userData.name}{'\n'}
@@ -36,7 +37,7 @@ export default function Confirm({ userData, showConfirm, goBackHandler, continue
             color2='mediumblue'
           />
 
-        </View>
+        </Card>
       </LinearGradient>
     </Modal>
   );
