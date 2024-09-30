@@ -73,7 +73,7 @@ export default function Game({ guessMultiple, restartHandler }) {
   // check the user's guess - is it valid, is it correct 
   function checkGuess(guess) {
     // check if guess is multiple of number, give alert if invalid
-    if (guess % guessMultiple != 0) {
+    if (guess % guessMultiple != 0 || guess < 1 || guess > 100) {
       Alert.alert(
         'Invalid number!',
         'Number has to be a multiple of ' + guessMultiple + ' between 1 and 100',
