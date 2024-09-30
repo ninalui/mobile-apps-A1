@@ -40,7 +40,7 @@ export default function Start({ registerInputHandler }) {
   return (
     <View style={globalStyles.container}>
       <Text style={styles.welcomeText}>Welcome</Text>
-      <Card>
+      <Card style={styles.card}>
         {/* name input */}
         <StartInput
           label={'Name:'}
@@ -106,4 +106,7 @@ const styles = StyleSheet.create({
     color: 'indigo',
     marginBottom: 20,
   },
+  card: {
+    width: '70%',
+  }
 });
