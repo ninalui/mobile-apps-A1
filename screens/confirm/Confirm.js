@@ -8,6 +8,7 @@ import MainText from "../../components/MainText";
 
 export default function Confirm({ userData, showConfirm, goBackHandler, continueHandler }) {
 
+  // text to show user the information they entered
   const confirmText = `
 Hello ${userData.name}
 Here is the information you entered:

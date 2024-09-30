@@ -7,6 +7,7 @@ export const globalStyles = StyleSheet.create({
     justifyContent: 'center',
     width: '100%',
   },
+  // child container (used in game result and game prompts to ensure content is centered)
   childContainer: {
     alignItems: 'center',
     justifyContent: 'center',
@@ -22,6 +23,7 @@ export const globalStyles = StyleSheet.create({
     lineHeight: 30,
     height: 50,
   },
+  // button row style to ensure buttons are not full width and for when 2 buttons are side by side
   buttonRow: {
     flexDirection: 'row',
     alignItems: 'center',

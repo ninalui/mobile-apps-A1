@@ -16,6 +16,7 @@ export default function Start({ registerInputHandler }) {
   const [validEmail, setValidEmail] = useState(true);
   const [validPhone, setValidPhone] = useState(true);
 
+  // clear all input fields
   function clearInputs() {
     setNameInput('');
     setEmailInput('');
@@ -23,6 +24,7 @@ export default function Start({ registerInputHandler }) {
     setIsRobot(false);
   };
 
+  // check if all inputs are valid before registering, show alert if not
   function checkInputs() {
     if (!validName || !validEmail || !validPhone) {
       Alert.alert(
@@ -84,6 +86,7 @@ export default function Start({ registerInputHandler }) {
           onValueChange={setIsRobot}
         />
 
+        {/* two buttons - reset to clear text, register to submit input */}
         <TwoButtons
           title1='Reset'
           onPress1={clearInputs}

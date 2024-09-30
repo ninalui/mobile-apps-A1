@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, Text, Button, TextInput, StyleSheet } from "react-native";
+import { View, Text, TextInput, StyleSheet } from "react-native";
 import { globalStyles } from "../styles";
 import GameButton from "./GameButton";
 
@@ -28,13 +28,14 @@ export default function GamePrompts({ attemptsLeft, timeLeft, submitHandler, hin
         </Text>
       </View>
 
-      {/* hint button - disabled after user presses once */}
+      {/* button to show hint - disabled after user presses once */}
       <GameButton
         title='Use a Hint'
         onPress={hintHandler}
         disabled={isHintUsed}
       />
-      {/* submit guess button */}
+
+      {/* button for user to submit their guess */}
       <GameButton
         title='Submit Guess'
         onPress={() => submitHandler(guess)}

@@ -12,6 +12,7 @@ export default function StartInput({ label, value, onChangeText, isValid, errorM
         value={value}
         onChangeText={onChangeText}
       />
+      {/* show error message if input is not valid */}
       {isValid ? <Text></Text> : <Text style={styles.errorMessage}>{errorMessage}</Text>}
     </View>
   );
