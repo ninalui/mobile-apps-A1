@@ -58,6 +58,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   guessInput: {
-    width: 30,
+    width: 40,
   },
 });
