@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { StatusBar } from 'expo-status-bar';
-import { View } from 'react-native';
+import { SafeAreaView, View } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import Start from './screens/start/Start';
 import Confirm from './screens/confirm/Confirm';
@@ -37,12 +37,10 @@ export default function App() {
 
   return (
     <LinearGradient colors={['lightblue', 'mediumpurple']} style={globalStyles.container}>
-      <View>
         <StatusBar style="auto" />
         { !showGame ? <Start registerInputHandler={handleRegisterInput} /> : null }
-        <Confirm userData={userData} showConfirm={showConfirm} goBackHandler={handleConfirmGoBack} continueHandler={handleConfirmContinue}/>
+        { showConfirm ? <Confirm userData={userData} showConfirm={showConfirm} goBackHandler={handleConfirmGoBack} continueHandler={handleConfirmContinue}/> : null }
         { showGame ? <Game guessMultiple={guessMultiple} restartHandler={handleResetGame}/> : null }
-      </View >
     </LinearGradient>
   );
 }
