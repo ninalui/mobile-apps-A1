@@ -3,6 +3,7 @@ import { Button, StyleSheet, Text, TextInput, View, Alert } from 'react-native';
 import Checkbox from 'expo-checkbox';
 import { globalStyles } from '../../styles';
 import StartInput from '../../components/StartInput';
+import CheckBoxField from '../../components/CheckBoxField';
 import TwoButtons from '../../components/TwoButtons';
 
 export default function Start({ registerInputHandler }) {
@@ -76,16 +77,12 @@ export default function Start({ registerInputHandler }) {
           errorMessage={'Please enter a valid phone number'}
         />
 
-        <View style={styles.checkBoxContainer}>
-          <Checkbox
-            value={isRobot}
-            onValueChange={setIsRobot}
-          />
-
-          <View style={{ marginLeft: 10 }}>
-            <Text style={globalStyles.textColor}>I am not a robot</Text>
-          </View>
-        </View>
+        {/* I am not a robot checkbox */}
+        <CheckBoxField
+          label='I am not a robot'
+          value={isRobot}
+          onValueChange={setIsRobot}
+        />
 
         <TwoButtons
           title1='Reset'
@@ -109,13 +106,4 @@ const styles = StyleSheet.create({
     color: 'indigo',
     marginBottom: 20,
   },
-  checkBoxContainer: {
-    flexDirection: 'row',
-    marginTop: 10,
-    marginBottom: 10,
-  },
-  errorMessage: {
-    color: 'dimgrey',
-    marginBottom: 10,
-  }
 });
