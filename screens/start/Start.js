@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Button, StyleSheet, Text, TextInput, View, Alert } from 'react-native';
 import Checkbox from 'expo-checkbox';
 import { globalStyles } from '../../styles';
+import StartInput from '../../components/StartInput';
 import TwoButtons from '../../components/TwoButtons';
 
 export default function Start({ registerInputHandler }) {
@@ -39,38 +40,41 @@ export default function Start({ registerInputHandler }) {
     <View style={globalStyles.container}>
       <Text style={styles.welcomeText}>Welcome</Text>
       <View style={globalStyles.card}>
-        <Text style={globalStyles.textColor}>Name:</Text>
-        <TextInput
-          style={globalStyles.inputField}
+        {/* name input */}
+        <StartInput
+          label={'Name:'}
           value={nameInput}
           onChangeText={(text) => {
             setNameInput(text);
             setValidName(text.length > 1 && !text.match(/\d/));
           }}
+          isValid={validName}
+          errorMessage={'Please enter a valid name'}
         />
-        {validName ? <Text></Text> : <Text style={styles.errorMessage}>Please enter a valid name</Text>}
 
-        <Text style={globalStyles.textColor}>Email:</Text>
-        <TextInput
-          style={globalStyles.inputField}
+        {/* email input */}
+        <StartInput
+          label={'Email:'}
           value={emailInput}
           onChangeText={(text) => {
             setEmailInput(text);
             setValidEmail(text.includes('@') && text.includes('.'));
           }}
+          isValid={validEmail}
+          errorMessage={'Please enter a valid email'}
         />
-        {validEmail ? <Text></Text> : <Text style={styles.errorMessage}>Please enter a valid email</Text>}
 
-        <Text style={globalStyles.textColor}>Phone number:</Text>
-        <TextInput
-          style={globalStyles.inputField}
+        {/* phone input */}
+        <StartInput
+          label={'Phone number:'}
           value={phoneInput}
           onChangeText={(text) => {
             setPhoneInput(text);
             setValidPhone(text.length === 10 && !isNaN(text) && text[text.length - 1] !== '0' && text[text.length - 1] !== '1');
           }}
+          isValid={validPhone}
+          errorMessage={'Please enter a valid phone number'}
         />
-        {validPhone ? <Text></Text> : <Text style={styles.errorMessage}>Please enter a valid phone number</Text>}
 
         <View style={styles.checkBoxContainer}>
           <Checkbox
@@ -83,14 +87,14 @@ export default function Start({ registerInputHandler }) {
           </View>
         </View>
 
-        <TwoButtons 
-        title1='Reset' 
-        onPress1={clearInputs} 
-        color1='firebrick' 
-        title2='Register' 
-        onPress2={checkInputs} 
-        color2='mediumblue' 
-        disabled={!isRobot}
+        <TwoButtons
+          title1='Reset'
+          onPress1={clearInputs}
+          color1='firebrick'
+          title2='Register'
+          onPress2={checkInputs}
+          color2='mediumblue'
+          disabled={!isRobot}
         />
 
       </View>
