@@ -3,7 +3,7 @@ import { View, Text, Button, TextInput, StyleSheet } from "react-native";
 import { globalStyles } from "../styles";
 import GameButton from "./GameButton";
 
-export default function GamePrompts({ number, attemptsLeft, timeLeft, submitHandler, hintHandler, isHintUsed, hint }) {
+export default function GamePrompts({ attemptsLeft, timeLeft, submitHandler, hintHandler, isHintUsed, hint }) {
   const [guess, setGuess] = useState('');
 
   return (
@@ -53,11 +53,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   guessInput: {
-    fontSize: 20,
     width: 30,
-    textAlign: 'center',
-    fontWeight: 'bold',
-    color: 'darkslateblue',
-    marginTop: 10,
   },
 });
