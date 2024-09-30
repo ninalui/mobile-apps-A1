@@ -202,6 +202,7 @@ const styles = StyleSheet.create({
   restartButtonPosition: {
     alignSelf: 'flex-end',
     marginBottom: 20,
+    marginRight: 10,
   },
 });
 
