@@ -9,10 +9,10 @@ import GameButton from "../../components/GameButton";
 
 // game screens to navigate between during gameplay
 const SCREENS = {
-  START: 'start',
-  PROMPT: 'prompt',
-  RESULT: 'result',
-  OVER: 'over',
+  START: 'start', // initial screen, when game has not yet started
+  PROMPT: 'prompt', // to prompt user to submit a guess
+  RESULT: 'result', // to show user the result of their guess
+  OVER: 'over', // when game is over
 };
 
 export default function Game({ guessMultiple, restartHandler }) {
@@ -147,9 +147,11 @@ export default function Game({ guessMultiple, restartHandler }) {
 
       {/* take user back to start screen and resets all information */}
       <View style={styles.restartButtonPosition}>
-        <Button
-          title="Restart"
-          onPress={restartHandler} />
+        <GameButton
+          title='Restart'
+          onPress={restartHandler}
+          color='default'
+        />
       </View>
 
       <Card>
