@@ -17,13 +17,13 @@ export default function GamePrompts({ attemptsLeft, timeLeft, submitHandler, hin
 
       <View style={styles.textContainer}>
         {/* show hint only if user has used it */}
-        {hint ? <Text>{hint}.</Text> : <Text />}
+        {hint ? <Text style={styles.hintText}>{hint}.</Text> : <Text />}
 
         {/* show user attempts and time left */}
-        <Text style={styles.textGrey}>
+        <Text style={styles.gameText}>
           Attempts left: {attemptsLeft}
         </Text>
-        <Text style={styles.textGrey}>
+        <Text style={styles.gameText}>
           Timer: {timeLeft}s
         </Text>
       </View>
@@ -44,8 +44,12 @@ export default function GamePrompts({ attemptsLeft, timeLeft, submitHandler, hin
 }
 
 const styles = StyleSheet.create({
-  textGrey: {
+  hintText: {
+    fontSize: 17,
+  },
+  gameText: {
     color: 'dimgrey',
+    fontSize: 16,
   },
   textContainer: {
     marginTop: 15,
