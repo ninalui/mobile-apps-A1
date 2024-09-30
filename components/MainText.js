@@ -12,6 +12,6 @@ export default function MainText({ text }) {
 export const styles = StyleSheet.create({
   mainText: {
     color: 'darkslateblue',
-    fontSize: 16,
+    fontSize: 20,
   },
 });
