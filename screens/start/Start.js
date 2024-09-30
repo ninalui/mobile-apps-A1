@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import { StyleSheet, Text, View, Alert } from 'react-native';
+import { StyleSheet, View, Alert } from 'react-native';
 import { globalStyles } from '../../styles';
+import Header from '../../components/Header';
 import Card from '../../components/Card';
 import StartInput from '../../components/StartInput';
 import CheckBoxField from '../../components/CheckBoxField';
@@ -41,7 +42,7 @@ export default function Start({ registerInputHandler }) {
 
   return (
     <View style={globalStyles.container}>
-      <Text style={styles.welcomeText}>Welcome</Text>
+      <Header title='Welcome' />
       <Card style={styles.card}>
         {/* name input */}
         <StartInput
@@ -103,12 +104,6 @@ export default function Start({ registerInputHandler }) {
 }
 
 const styles = StyleSheet.create({
-  welcomeText: {
-    fontSize: 20,
-    fontWeight: 'bold',
-    color: 'indigo',
-    marginBottom: 20,
-  },
   card: {
     width: '70%',
   }
