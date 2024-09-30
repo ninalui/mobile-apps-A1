@@ -1,11 +1,12 @@
 import React from 'react';
 import { Text, TextInput, StyleSheet } from 'react-native';
 import { globalStyles } from '../styles';
+import MainText from './MainText';
 
 export default function StartInput({ label, value, onChangeText, isValid, errorMessage }) {
   return (
     <>
-      <Text style={globalStyles.textColor}>{label}</Text>
+      <MainText text={label} />
       <TextInput
         style={globalStyles.inputField}
         value={value}

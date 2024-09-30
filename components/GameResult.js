@@ -1,7 +1,8 @@
 import React from "react";
-import { View, Text, Button, Image, StyleSheet } from "react-native";
+import { View, Image, StyleSheet } from "react-native";
 import { globalStyles } from "../styles";
 import GameButton from "./GameButton";
+import MainText from "./MainText";
 
 export default function GameResult({ guessResult, attemptsUsed, number, tryAgainHandler, newGameHandler, endGameHandler }) {
   const imageUrl = `https://picsum.photos/id/${number}/100/100`;
@@ -9,17 +10,14 @@ export default function GameResult({ guessResult, attemptsUsed, number, tryAgain
     <View style={globalStyles.childContainer}>
       {guessResult === 'correct' ? (
         <>
-          <Text style={globalStyles.textColor}>
-            You guessed correct!
-          </Text>
-          <Text style={globalStyles.textColor}>
-            Attempts used: {attemptsUsed}
-          </Text>
-          <View style={{padding: 10}}>
-          <Image
-            style={styles.image}
-            source={{ uri: imageUrl }}
-          />
+          <MainText text={'You guessed correct!'} />
+          <MainText text={`Attempts used: ${attemptsUsed}`} />
+
+          <View style={{ padding: 10 }}>
+            <Image
+              style={styles.image}
+              source={{ uri: imageUrl }}
+            />
           </View>
           <GameButton
             title='New Game'
@@ -28,20 +26,17 @@ export default function GameResult({ guessResult, attemptsUsed, number, tryAgain
         </>
       ) : (
         <>
-          <Text style={globalStyles.textColor}>
-            You did not guess correct! </Text>
-          <Text style={globalStyles.textColor}>
-            You should guess {guessResult}.
-          </Text>
+          <MainText text={'You did not guess correct!'} />
+          <MainText text={`You should guess ${guessResult}.`} />
 
-            <GameButton
-              title='Try Again'
-              onPress={tryAgainHandler}
-            />
-            <GameButton
-              title='End the game'
-              onPress={endGameHandler}
-            />
+          <GameButton
+            title='Try Again'
+            onPress={tryAgainHandler}
+          />
+          <GameButton
+            title='End the game'
+            onPress={endGameHandler}
+          />
         </>
       )
       }
@@ -53,6 +48,5 @@ const styles = StyleSheet.create({
   image: {
     width: 100,
     height: 100,
-    marginBottom: 10,
   },
 });

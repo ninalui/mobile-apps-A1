@@ -1,7 +1,7 @@
 import React from "react";
-import { View, Text, StyleSheet } from "react-native";
+import { View, StyleSheet } from "react-native";
 import Checkbox from 'expo-checkbox';
-import { globalStyles } from "../styles";
+import MainText from "./MainText";
 
 
 export default function CheckBoxField({ label, value, onValueChange }) {
@@ -12,7 +12,7 @@ export default function CheckBoxField({ label, value, onValueChange }) {
         onValueChange={onValueChange}
       />
       <View style={{ marginLeft: 10 }}>
-        <Text style={globalStyles.textColor}>{label}</Text>
+        <MainText text={label} />
       </View>
     </View>
   );

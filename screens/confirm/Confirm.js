@@ -4,8 +4,17 @@ import { Text, StyleSheet, Modal } from "react-native";
 import { globalStyles } from '../../styles';
 import Card from '../../components/Card';
 import TwoButtons from '../../components/TwoButtons';
+import MainText from "../../components/MainText";
 
 export default function Confirm({ userData, showConfirm, goBackHandler, continueHandler }) {
+
+  const confirmText = `
+Hello ${userData.name}
+Here is the information you entered:
+${userData.email}
+${userData.phone}
+If it is not correct, please go back and edit them.
+  `.trim();
 
   return (
     <Modal
@@ -19,27 +28,21 @@ export default function Confirm({ userData, showConfirm, goBackHandler, continue
       >
         <Card>
           {/* show the data that the user entered */}
-          <Text style={globalStyles.textColor}>
-            Hello {userData.name}{'\n'}
-            Here is the information you entered:{'\n'}
-            {userData.email}{'\n'}
-            {userData.phone}{'\n'}
-            If it is not correct, please go back and edit them.
-          </Text>
+          <MainText text={confirmText} />
 
-          {/* two buttons - go back to register form, continue to game*/}
-          <TwoButtons
-            title1='Go Back'
-            onPress1={goBackHandler}
-            color1='firebrick'
-            title2='Continue'
-            onPress2={continueHandler}
-            color2='mediumblue'
-          />
+        {/* two buttons - go back to register form, continue to game*/}
+        <TwoButtons
+          title1='Go Back'
+          onPress1={goBackHandler}
+          color1='firebrick'
+          title2='Continue'
+          onPress2={continueHandler}
+          color2='mediumblue'
+        />
 
-        </Card>
-      </LinearGradient>
-    </Modal>
+      </Card>
+    </LinearGradient>
+    </Modal >
   );
 }
 

@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { View, Text, Button, StyleSheet, Alert } from "react-native";
+import { View, StyleSheet, Alert } from "react-native";
 import GamePrompts from "../../components/GamePrompts";
 import GameResult from "../../components/GameResult";
 import GameOver from "../../components/GameOver";
 import { globalStyles } from "../../styles";
 import Card from "../../components/Card";
 import GameButton from "../../components/GameButton";
+import MainText from "../../components/MainText";
 
 // game screens to navigate between during gameplay
 const SCREENS = {
@@ -157,9 +158,7 @@ export default function Game({ guessMultiple, restartHandler }) {
       <Card>
         {/* show game prompt while on game's start and input prompt screen */}
         {(currentScreen == SCREENS.START || currentScreen == SCREENS.PROMPT) && (
-          <Text style={globalStyles.textColor}>
-            Guess a number between 1 & 100 that is multiple of {guessMultiple}.
-          </Text>
+          <MainText text={`Guess a number between 1 & 100 that is a multiple of ${guessMultiple}.`} />
         )}
 
         {/* show start button if game has not yet started */}

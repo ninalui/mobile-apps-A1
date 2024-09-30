@@ -2,22 +2,19 @@ import React from "react";
 import { View, Text, Button, Image, StyleSheet } from "react-native";
 import { globalStyles } from "../styles";
 import GameButton from "./GameButton";
+import MainText from "./MainText";
 
 export default function GameOver({ newGameHandler, gameOverReason }) {
   return (
     <View style={globalStyles.childContainer}>
-      <Text style={globalStyles.textColor}>
-        The game is over!
-      </Text>
+      <MainText text='The game is over!' />
       <Image
         style={styles.image}
         source={require('../assets/sademoji.png')}
       />
       {gameOverReason === 'userQuit'
         ? null
-        : <Text style={globalStyles.textColor}>
-          You are out of {gameOverReason}.
-        </Text>
+        : <MainText text={`You are out of ${gameOverReason}.`} />
       }
 
       <View style={{ padding: 10 }}>
